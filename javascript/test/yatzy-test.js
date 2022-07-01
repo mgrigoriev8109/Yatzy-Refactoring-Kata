@@ -4,16 +4,16 @@ var Yatzy = require("../lib/yatzy");
 
 describe('Chance', function() {
     it('scores sum of all dice', function(){
-        assert.equal(15, Yatzy.chance(2, 3, 4, 5, 1));
-        assert.equal(16, Yatzy.chance(3, 3, 4, 5, 1));
+        assert.equal(15, new Yatzy(2, 3, 4, 5, 1).chance());
+        assert.equal(16, new Yatzy(3, 3, 4, 5, 1).chance());
     });
 });
 
 describe("Yatzy", function() {
     it("scores 50", function() {
-        assert.equal(50, Yatzy.yatzy(4,4,4,4,4));
-        assert.equal(50, Yatzy.yatzy(6,6,6,6,6));
-        assert.equal(0, Yatzy.yatzy(6,6,6,6,3));
+        assert.equal(50, new Yatzy(4,4,4,4,4).yatzy());
+        assert.equal(50, new Yatzy(6,6,6,6,6).yatzy());
+        assert.equal(0, new Yatzy(6,6,6,6,3).yatzy());
     });
 });
 

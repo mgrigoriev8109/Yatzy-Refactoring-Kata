@@ -15,7 +15,7 @@ var Yatzy = function(d1, d2, d3, d4, d5) {
         }
         return sum;
     }
-    
+
     this.countTallies = function() {
         var tallies = [0, 0, 0, 0, 0, 0, 0, 0, 0];
         var index = 0
@@ -93,32 +93,29 @@ var Yatzy = function(d1, d2, d3, d4, d5) {
             return 20;
         return 0;
     }
-}
 
-
-
-Yatzy.chance = function(d1, d2, d3, d4, d5) {
-    var total = 0;
-    total += d1;
-    total += d2;
-    total += d3;
-    total += d4;
-    total += d5;
-    return total;
-}
-
-Yatzy.yatzy = function() {
-    var tallies = [0, 0, 0, 0, 0, 0, 0, 0];
-    for (var i = 0; i != arguments.length; ++i) {
-        var die = arguments[i];
-        tallies[die-1]++; 
+    this.chance = function() {
+        var total = 0;
+        total += d1;
+        total += d2;
+        total += d3;
+        total += d4;
+        total += d5;
+        return total;
     }
-    for (i = 0; i != 6; i++)
-        if (tallies[i] == 5)
-            return 50;
-    return 0;
+    
+    this.yatzy = function() {
+        var tallies = [0, 0, 0, 0, 0, 0, 0, 0];
+        for (var i = 0; i != this.dice.length; ++i) {
+            var die = this.dice[i];
+            tallies[die-1]++; 
+        }
+        for (i = 0; i != 6; i++)
+            if (tallies[i] == 5)
+                return 50;
+        return 0;
+    }
 }
-
 
 Yatzy.fullHouse = function(d1, d2, d3, d4, d5)
 {
