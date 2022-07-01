@@ -17,13 +17,7 @@ var Yatzy = function(d1, d2, d3, d4, d5) {
     }
 
     this.score_pair = function() {
-        var tallies = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-        var index = 0
-
-        for (at = 0; at != 5; at++) {
-            index = this.dice[at] - 1;
-            tallies[index] ++;
-        }
+        var tallies = this.tallies()
 
         for (at = 0; at != 6; at++)
             if (tallies[6-at-1] >= 2)
@@ -32,6 +26,22 @@ var Yatzy = function(d1, d2, d3, d4, d5) {
     }
 
     this.two_pair = function() {
+        var tallies = this.countTallies()
+
+        var pairs = 0;
+        var score = 0;
+        for (i = 0; i < 6; i += 1)
+            if (tallies[6-i-1] >= 2) {
+                pairs++;
+                score += (6-i);
+            }
+        if (pairs == 2)
+            return score * 2;
+        else
+            return 0;
+    }
+
+    this.countTallies = function() {
         var tallies = [0, 0, 0, 0, 0, 0, 0, 0, 0];
         var index = 0
 
@@ -39,18 +49,7 @@ var Yatzy = function(d1, d2, d3, d4, d5) {
             index = this.dice[at] - 1;
             tallies[index] ++;
         }
-
-        var n = 0;
-        var score = 0;
-        for (i = 0; i < 6; i += 1)
-            if (tallies[6-i-1] >= 2) {
-                n++;
-                score += (6-i);
-            }
-        if (n == 2)
-            return score * 2;
-        else
-            return 0;
+        return tallies
     }
 }
 
