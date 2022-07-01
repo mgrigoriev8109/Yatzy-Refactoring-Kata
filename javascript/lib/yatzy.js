@@ -17,7 +17,7 @@ var Yatzy = function(d1, d2, d3, d4, d5) {
     }
 
     this.score_pair = function() {
-        var tallies = this.tallies()
+        var tallies = this.countTallies()
 
         for (at = 0; at != 6; at++)
             if (tallies[6-at-1] >= 2)
@@ -41,6 +41,24 @@ var Yatzy = function(d1, d2, d3, d4, d5) {
             return 0;
     }
 
+    this.three_of_a_kind = function() {
+        var tallies = this.countTallies()
+
+        for (i = 0; i < 6; i++)
+            if (tallies[i] >= 3)
+                return (i+1) * 3;
+        return 0;
+    }
+    
+    this.four_of_a_kind = function() {
+        var tallies = this.countTallies()
+
+        for (i = 0; i < 6; i++)
+            if (tallies[i] >= 4)
+                return (i+1) * 4;
+        return 0;
+    }
+    
     this.countTallies = function() {
         var tallies = [0, 0, 0, 0, 0, 0, 0, 0, 0];
         var index = 0
@@ -77,36 +95,6 @@ Yatzy.yatzy = function() {
     return 0;
 }
 
-
-Yatzy.four_of_a_kind = function(d1, d2, d3, d4, d5)
-{
-    var tallies;
-    tallies = [0, 0, 0, 0, 0, 0, 0, 0]
-    tallies[d1-1]++;
-    tallies[d2-1]++;
-    tallies[d3-1]++;
-    tallies[d4-1]++;
-    tallies[d5-1]++;
-    for (i = 0; i < 6; i++)
-        if (tallies[i] >= 4)
-            return (i+1) * 4;
-    return 0;
-}
-
-Yatzy.three_of_a_kind = function(d1, d2, d3, d4, d5)
-{
-    var tallies;
-    tallies = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-    tallies[d1-1]++;
-    tallies[d2-1]++;
-    tallies[d3-1]++;
-    tallies[d4-1]++;
-    tallies[d5-1]++;
-    for (i = 0; i < 6; i++)
-        if (tallies[i] >= 3)
-            return (i+1) * 3;
-    return 0;
-}
 
 Yatzy.smallStraight = function(d1, d2, d3, d4, d5)
 {
