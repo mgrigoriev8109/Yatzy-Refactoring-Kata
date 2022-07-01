@@ -6,10 +6,30 @@ var Yatzy = function(d1, d2, d3, d4, _5) {
     this.dice[3] = d4;
     this.dice[4] = _5;
 
+    this.ones_through_sixes = function(category) {
+        var sum = 0;
+        for (at = 0; at != 5; at++) {
+            if (this.dice[at] == category) {
+                sum += category;
+            }
+        }
+        return sum;
+    }
+
+    this.threes = function()
+    {
+        var sum = 0;
+        for (at = 0; at != 5; at++) {
+            if (this.dice[at] == 3) {
+                sum += 3;
+            }
+        }
+        return sum;
+    }
+
     this.fours = function()
     {
-        var sum;
-        sum = 0;
+        var sum = 0;
         for (at = 0; at != 5; at++) {
             if (this.dice[at] == 4) {
                 sum += 4;
@@ -20,20 +40,19 @@ var Yatzy = function(d1, d2, d3, d4, _5) {
 
     this.fives = function()
     {
-        s = 0
-        var i
+        var sum = 0
         for (i = 0; i < this.dice.length; i++)
             if (this.dice[i] == 5)
-                s = s + 5;
-        return s;
+                sum += 5;
+        return sum;
     }
 
     this.sixes = function()
     {
-        sum = 0;
+        var sum = 0;
         for (var at = 0; at < this.dice.length; at++)
             if (this.dice[at] == 6)
-                sum = sum + 6;
+                sum += 6;
         return sum;
     }
 }
@@ -83,16 +102,6 @@ Yatzy.twos = function(d1, d2, d3, d4, d5) {
     return sum;
 }
 
-Yatzy.threes = function(d1, d2, d3, d4, d5) {
-    var s;
-    s = 0;
-    if (d1 == 3) s += 3;
-    if (d2 == 3) s += 3;
-    if (d3 == 3) s += 3;
-    if (d4 == 3) s += 3;
-    if (d5 == 3) s += 3;
-    return s;
-}
 
 Yatzy.score_pair = function(d1, d2, d3, d4, d5)
 {
