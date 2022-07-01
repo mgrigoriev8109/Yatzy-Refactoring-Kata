@@ -15,6 +15,17 @@ var Yatzy = function(d1, d2, d3, d4, d5) {
         }
         return sum;
     }
+    
+    this.countTallies = function() {
+        var tallies = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+        var index = 0
+
+        for (at = 0; at != 5; at++) {
+            index = this.dice[at] - 1;
+            tallies[index] ++;
+        }
+        return tallies
+    }
 
     this.score_pair = function() {
         var tallies = this.countTallies()
@@ -59,15 +70,28 @@ var Yatzy = function(d1, d2, d3, d4, d5) {
         return 0;
     }
     
-    this.countTallies = function() {
-        var tallies = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-        var index = 0
+    this.smallStraight = function() {
+        var tallies = this.countTallies()
 
-        for (at = 0; at != 5; at++) {
-            index = this.dice[at] - 1;
-            tallies[index] ++;
-        }
-        return tallies
+        if (tallies[0] == 1 &&
+            tallies[1] == 1 &&
+            tallies[2] == 1 &&
+            tallies[3] == 1 &&
+            tallies[4] == 1)
+            return 15;
+        return 0;
+    }
+
+    this.largeStraight = function() {
+        var tallies = this.countTallies()
+
+        if (tallies[1] == 1 &&
+            tallies[2] == 1 &&
+            tallies[3] == 1 &&
+            tallies[4] == 1
+            && tallies[5] == 1)
+            return 20;
+        return 0;
     }
 }
 
@@ -95,42 +119,6 @@ Yatzy.yatzy = function() {
     return 0;
 }
 
-
-Yatzy.smallStraight = function(d1, d2, d3, d4, d5)
-{
-    var tallies;
-    tallies = [0, 0, 0, 0, 0, 0, 0]
-    tallies[d1-1] += 1;
-    tallies[d2-1] += 1;
-    tallies[d3-1] += 1;
-    tallies[d4-1] += 1;
-    tallies[d5-1] += 1;
-    if (tallies[0] == 1 &&
-        tallies[1] == 1 &&
-        tallies[2] == 1 &&
-        tallies[3] == 1 &&
-        tallies[4] == 1)
-        return 15;
-    return 0;
-}
-
-Yatzy.largeStraight = function(d1, d2, d3, d4, d5)
-{
-    var tallies;
-    tallies = [0, 0, 0, 0,0,0,0,0];
-    tallies[d1-1] += 1;
-    tallies[d2-1] += 1;
-    tallies[d3-1] += 1;
-    tallies[d4-1] += 1;
-    tallies[d5-1] += 1;
-    if (tallies[1] == 1 &&
-        tallies[2] == 1 &&
-        tallies[3] == 1 &&
-        tallies[4] == 1
-        && tallies[5] == 1)
-        return 20;
-    return 0;
-}
 
 Yatzy.fullHouse = function(d1, d2, d3, d4, d5)
 {
